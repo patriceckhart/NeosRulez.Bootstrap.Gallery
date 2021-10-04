@@ -25,13 +25,3 @@
           hidden: 'ClientEval:node.properties.pagination ? false : true'
           group: neosrulezBootstrapGallery
           position: 2
-#    infinityLoading:
-#      type: boolean
-#      defaultValue: false
-#      ui:
-#        label: i18n
-#        reloadPageIfChanged: true
-#        inspector:
-#          hidden: 'ClientEval:node.properties.pagination ? false : true'
-#          group: neosrulezBootstrapGallery
-#          position: 3
