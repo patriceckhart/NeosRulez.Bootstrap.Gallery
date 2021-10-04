@@ -1,0 +1,8 @@
+prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination.Chevron) < prototype(Neos.Fusion:Component) {
+
+    alignment = false
+
+    renderer = afx`
+        <i @if.render={props.alignment} class={props.alignment == 'left' ? 'fas fa-chevron-left' : 'fas fa-chevron-right'}></i>
+    `
+}

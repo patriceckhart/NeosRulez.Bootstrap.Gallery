@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="NeosRulez.Bootstrap" source-language="de" datatype="plaintext">
+        <body>
+            <trans-unit id="advancedSettings" xml:space="preserve">
+				<source>Erweiterte Einstellungen</source>
+			</trans-unit>
+            <trans-unit id="properties.pagination" xml:space="preserve">
+				<source>Pagination aktivieren</source>
+			</trans-unit>
+            <trans-unit id="properties.itemsPerPage" xml:space="preserve">
+				<source>Bilder pro Seite</source>
+			</trans-unit>
+            <trans-unit id="properties.infinityLoading" xml:space="preserve">
+				<source>Infinity loading</source>
+			</trans-unit>
+        </body>
+    </file>
+</xliff>

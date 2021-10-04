@@ -1,0 +1,37 @@
+'NeosRulez.Bootstrap:Content.Gallery':
+  ui:
+    inspector:
+      groups:
+        neosrulezBootstrapGallery:
+          label: NeosRulez.Bootstrap:NodeTypes.Content.Gallery:advancedSettings
+          icon: far fa-images
+  properties:
+    pagination:
+      type: boolean
+      defaultValue: true
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          group: neosrulezBootstrapGallery
+          position: 1
+    itemsPerPage:
+      type: string
+      defaultValue: 8
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          hidden: 'ClientEval:node.properties.pagination ? false : true'
+          group: neosrulezBootstrapGallery
+          position: 2
+#    infinityLoading:
+#      type: boolean
+#      defaultValue: false
+#      ui:
+#        label: i18n
+#        reloadPageIfChanged: true
+#        inspector:
+#          hidden: 'ClientEval:node.properties.pagination ? false : true'
+#          group: neosrulezBootstrapGallery
+#          position: 3

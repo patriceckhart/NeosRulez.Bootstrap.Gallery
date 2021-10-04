@@ -1,0 +1,14 @@
+Neos:
+  Flow:
+    mvc:
+      routes:
+        'NeosRulez.Bootstrap.Gallery': true
+  Neos:
+    fusion:
+      autoInclude:
+        NeosRulez.Bootstrap.Gallery: true
+    userInterface:
+      translation:
+        autoInclude:
+          NeosRulez.Bootstrap.Gallery:
+            - 'NodeTypes/Content/*'

@@ -1,0 +1,56 @@
+prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination) < prototype(Neos.Fusion:Component) {
+
+    pages = ${this.assetsLength && this.itemsPerPage ? Math.round(String.toInteger(this.assetsLength) / String.toInteger(this.itemsPerPage)) : false}
+    page = ${request.arguments.page ? request.arguments.page : '1'}
+
+    documentUri = Neos.Neos:NodeUri {
+        absolute = true
+    }
+
+    begin = ${request.arguments.page ? ((String.toInteger(request.arguments.page) - 1) * (String.toInteger(node.properties.itemsPerPage) + 1)) : false}
+    end = ${request.arguments.page ? String.toInteger(node.properties.itemsPerPage) * String.toInteger(request.arguments.page) : false}
+
+    renderer = afx`
+        <nav @if.render={props.pages && node.properties.pagination ? true : false} id={props.paginationIdentifier} style={node.properties.infinityLoading ? 'visibility:hidden' : false} aria-label={props.paginationIdentifier} data-page={props.page} data-pages={props.pages} data-length={props.assetsLength}>
+            <ul class="pagination">
+                <li @if.render={String.toInteger(props.page) != 1 ? true : false} class="page-item">
+                    <a class="page-link" href={String.replace(props.documentUri, '.html', '') + '/page/' + (String.toInteger(props.page) - 1)} aria-label="Previous">
+                        <NeosRulez.Bootstrap.Gallery:Component.Pagination.Chevron alignment="left" />
+                    </a>
+                </li>
+                <Neos.Fusion:Loop items={Array.range(1, String.toInteger(props.pages), 1)} itemName="page">
+                    <li class={'page-item' + (String.toInteger(props.page) == String.toInteger(page) ? ' active' : '')} >
+                        <a class="page-link" href={String.replace(props.documentUri, '.html', '') + '/page/' + page}>{page}</a>
+                    </li>
+                </Neos.Fusion:Loop>
+                <li @if.render={String.toInteger(props.page) < String.toInteger(props.pages) ? true : false} class="page-item">
+                    <a id="next" class="page-link" href={String.replace(props.documentUri, '.html', '') + '/page/' + (String.toInteger(props.page) + 1)} aria-label="Next">
+                        <NeosRulez.Bootstrap.Gallery:Component.Pagination.Chevron alignment="right" />
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <NeosRulez.Bootstrap.Gallery:Component.Pagination.InfinityLoading />
+    `
+}
+
+prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination.InfinityLoading) < prototype(Neos.Fusion:Component) {
+
+    useInfinity = ${node.properties.infinityLoading}
+
+    renderer = afx`
+        <NeosRulez.Bootstrap.Gallery:Component.Pagination.InfinityLoading.Spinner />
+        <Neos.Fusion:Tag @if.render={props.useInfinity} tagName="script" @children="attributes.src">
+            <Neos.Fusion:ResourceUri path="resource://NeosRulez.Bootstrap.Gallery/Public/JavaScript/GalleryInfinity.js" />
+        </Neos.Fusion:Tag>
+    `
+}
+
+prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination.InfinityLoading.Spinner) < prototype(Neos.Fusion:Component) {
+
+    renderer = afx`
+        <div class="fa-3x text-center infinity--Spinner" style="display:none">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+    `
+}
