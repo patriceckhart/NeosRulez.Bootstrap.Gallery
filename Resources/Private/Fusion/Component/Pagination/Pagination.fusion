@@ -30,27 +30,5 @@ prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination) < prototype(Neos.Fus
                 </li>
             </ul>
         </nav>
-        <NeosRulez.Bootstrap.Gallery:Component.Pagination.InfinityLoading />
-    `
-}
-
-prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination.InfinityLoading) < prototype(Neos.Fusion:Component) {
-
-    useInfinity = ${node.properties.infinityLoading}
-
-    renderer = afx`
-        <NeosRulez.Bootstrap.Gallery:Component.Pagination.InfinityLoading.Spinner />
-        <Neos.Fusion:Tag @if.render={props.useInfinity} tagName="script" @children="attributes.src">
-            <Neos.Fusion:ResourceUri path="resource://NeosRulez.Bootstrap.Gallery/Public/JavaScript/GalleryInfinity.js" />
-        </Neos.Fusion:Tag>
-    `
-}
-
-prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination.InfinityLoading.Spinner) < prototype(Neos.Fusion:Component) {
-
-    renderer = afx`
-        <div class="fa-3x text-center infinity--Spinner" style="display:none">
-            <i class="fas fa-spinner fa-spin"></i>
-        </div>
     `
 }

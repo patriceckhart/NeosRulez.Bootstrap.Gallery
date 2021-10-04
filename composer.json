@@ -1,5 +1,5 @@
 {
-    "description": "An extended gallery for the NeosRulez.Bootstrap Package. With functions like pagination, infinity loading and other layouts.",
+    "description": "Extends the NeosRulez.Bootstrap Gallery NodeType by a pagination.",
     "type": "neos-package",
     "name": "neosrulez/bootstrap-gallery",
     "require": {
