@@ -7,11 +7,8 @@ prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination) < prototype(Neos.Fus
         absolute = true
     }
 
-    begin = ${request.arguments.page ? ((String.toInteger(request.arguments.page) - 1) * (String.toInteger(node.properties.itemsPerPage) + 1)) : false}
-    end = ${request.arguments.page ? String.toInteger(node.properties.itemsPerPage) * String.toInteger(request.arguments.page) : false}
-
     renderer = afx`
-        <nav @if.render={props.pages && node.properties.pagination ? true : false} id={props.paginationIdentifier} style={node.properties.infinityLoading ? 'visibility:hidden' : false} aria-label={props.paginationIdentifier} data-page={props.page} data-pages={props.pages} data-length={props.assetsLength}>
+        <nav @if.render={props.pages && props.usePagination ? true : false} id={props.paginationIdentifier} aria-label={props.paginationIdentifier} data-page={props.page} data-pages={props.pages} data-length={props.assetsLength}>
             <ul class="pagination">
                 <li @if.render={String.toInteger(props.page) != 1 ? true : false} class="page-item">
                     <a class="page-link" href={String.replace(props.documentUri, '.html', '') + '/page/' + (String.toInteger(props.page) - 1)} aria-label="Previous">

@@ -1,23 +1,33 @@
 prototype(NeosRulez.Bootstrap:Content.Gallery) {
 
+    usePagination = ${node.properties.pagination ? true : false}
+    itemsPerPage = ${node.properties.itemsPerPage}
+    identifier = ${node.identifier}
+
+    @context.usePagination = ${this.usePagination}
+    @context.itemsPerPage = ${this.itemsPerPage}
+    @context.identifier = ${this.identifier}
+
     page = ${request.arguments.page ? request.arguments.page : '1'}
-    begin = ${this.page ? ((String.toInteger(this.page) - 1) * (String.toInteger(node.properties.itemsPerPage))) : false}
-    end = ${this.page ? String.toInteger(node.properties.itemsPerPage) * String.toInteger(this.page) : false}
+    begin = ${this.page ? ((String.toInteger(this.page) - 1) * (String.toInteger(this.itemsPerPage))) : false}
+    end = ${this.page ? String.toInteger(this.itemsPerPage) * String.toInteger(this.page) : false}
 
+    galleryAssets = ${node.properties.assets ? node.properties.assets : (this.images ? this.images : false)}
+    @context.galleryAssets = ${this.galleryAssets}
     assets >
-    assets = ${node.properties.pagination ? Array.slice(node.properties.assets, this.begin, this.end) : node.properties.assets}
+    assets = ${this.usePagination ? Array.slice(this.galleryAssets, this.begin, this.end) : this.galleryAssets}
 
-    @context.pagination = NeosRulez.Bootstrap.Gallery:Component.Pagination {
-        itemsPerPage = ${String.toInteger(node.properties.itemsPerPage)}
-        paginationIdentifier = ${'pagination_gallery__' + node.identifier}
-        assetsLength = ${node.properties.assets ? Array.length(node.properties.assets) : false}
+    pagination = NeosRulez.Bootstrap.Gallery:Component.Pagination {
+        itemsPerPage = ${String.toInteger(itemsPerPage)}
+        paginationIdentifier = ${'pagination_gallery__' + identifier}
+        assetsLength = ${galleryAssets ? Array.length(galleryAssets) : false}
+        usePagination = ${usePagination}
     }
 
     renderer {
-        prototype(Neos.Fusion:Loop) {
-            @process.pagination = ${value + pagination}
-        }
+        content.@process.pagination = ${value + props.pagination}
     }
+
     @cache {
         mode = 'dynamic'
         entryIdentifier {
@@ -34,37 +44,3 @@ prototype(NeosRulez.Bootstrap:Content.Gallery) {
         }
     }
 }
-
-//prototype(NeosRulez.Bootstrap:Content.Gallery) < prototype(Neos.Neos:ContentComponent) {
-//    assets = ${node.properties.assets}
-//    lightbox = ${node.properties.lightbox ? true : false}
-//    noGutters = ${node.properties.noGutters ? ' g-0' : false}
-//    lightboxClassName = ${this.lightbox ? 'gallery-row row' + this.noGutters + ' lightbox' : 'gallery-row row' + this.noGutters}
-//    noCropping = ${node.properties.noCropping}
-//    columns = ${'col-6 ' + (node.properties.columns == '4' ? 'col-md-3' : node.properties.columns == '3' ? 'col-md-4' : node.properties.columns == '2' ? 'col-md-6' : 'col')}
-//    galleryId = ${'lightbox__' + node.identifier}
-//
-//    renderer = afx`
-//        <NeosRulez.Bootstrap:Component.AbstractContent>
-//            <code @if.render={!props.assets} >
-//                {I18n.translate('NeosRulez.Bootstrap:NodeTypes.Content.Gallery:content.emptyAssetList')}
-//            </code>
-//            <div @if.render={props.assets} class={props.lightboxClassName} >
-//                <Neos.Fusion:Loop items={props.assets} itemName="asset">
-//                    <div class={props.columns} >
-//                        <NeosRulez.Bootstrap:Content.Gallery.Item image={asset} lightbox={props.lightbox} noCropping={props.noCropping} galleryId={props.galleryId} />
-//                    </div>
-//                </Neos.Fusion:Loop>
-//            </div>
-//        </NeosRulez.Bootstrap:Component.AbstractContent>
-//    `
-//}
-//
-//prototype(NeosRulez.Bootstrap:Content.Gallery.Item) < prototype(Neos.Fusion:Component) {
-//    allowCropping = ${this.noCropping ? false : true}
-//
-//    renderer = afx`
-//        <NeosRulez.Bootstrap:Component.ImageTag @if.render={!props.lightbox} image={props.image} width="300" height="300" allowCropping={props.allowCropping} allowUpScaling={true} />
-//        <NeosRulez.Bootstrap:Component.ImageTag.Lightbox @if.render={props.lightbox} image={props.image} width="300" height="300" allowCropping={props.allowCropping} allowUpScaling={true} galleryId={props.galleryId} />
-//    `
-//}
