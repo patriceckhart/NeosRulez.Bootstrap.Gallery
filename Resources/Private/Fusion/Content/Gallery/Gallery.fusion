@@ -15,7 +15,7 @@ prototype(NeosRulez.Bootstrap:Content.Gallery) {
     galleryAssets = ${node.properties.assets ? node.properties.assets : (this.images ? this.images : false)}
     @context.galleryAssets = ${this.galleryAssets}
     assets >
-    assets = ${this.usePagination ? Array.slice(this.galleryAssets, this.begin, this.end) : this.galleryAssets}
+    assets = ${this.usePagination ? (this.galleryAssets ? Array.slice(this.galleryAssets, this.begin, this.end) : false) : this.galleryAssets}
 
     pagination = NeosRulez.Bootstrap.Gallery:Component.Pagination {
         itemsPerPage = ${String.toInteger(itemsPerPage)}
