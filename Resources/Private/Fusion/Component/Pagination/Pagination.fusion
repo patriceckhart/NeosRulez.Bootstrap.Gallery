@@ -1,6 +1,6 @@
 prototype(NeosRulez.Bootstrap.Gallery:Component.Pagination) < prototype(Neos.Fusion:Component) {
 
-    pages = ${this.assetsLength && this.itemsPerPage ? Math.round(String.toInteger(this.assetsLength) / String.toInteger(this.itemsPerPage)) : false}
+    pages = ${this.assetsLength && this.itemsPerPage ? Math.ceil(String.toInteger(this.assetsLength) / String.toInteger(this.itemsPerPage)) : false}
     page = ${request.arguments.page ? request.arguments.page : '1'}
 
     documentUri = Neos.Neos:NodeUri {
