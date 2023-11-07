@@ -25,7 +25,7 @@ prototype(NeosRulez.Bootstrap:Content.Gallery) {
     }
 
     renderer {
-        content.@process.pagination = ${value + props.pagination}
+        content.@process.pagination = ${value + (props.pagination ? props.pagination : '')}
     }
 
     @cache {

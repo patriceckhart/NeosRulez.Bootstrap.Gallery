@@ -8,7 +8,6 @@
   properties:
     pagination:
       type: boolean
-      defaultValue: true
       ui:
         label: i18n
         reloadIfChanged: true
